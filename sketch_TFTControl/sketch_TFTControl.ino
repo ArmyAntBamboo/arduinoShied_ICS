@@ -1,21 +1,21 @@
 //int j=0;
-const float targetpress=3.0;//目标套压
-const float presentpress=4.0;//当前套压
-const int targetflow=2500;//目标瞬流
-const int presentflow=2300;//当前瞬流
-const unsigned int totalflow=400000;//累计流量
-const int dailyflow=10000;//日产气量
-const int cycle=600;//采样周期
-const float stepRange=0.5;//调节幅度
-const int storage=30;//数据存储量
-const bool power=0;//供电模式
-const float instantLP=4.0;//瞬时产液量
-const float totalLP=4.0;//累计产液量
-const float previousLP=4.0;//前一日产液量
-const int bottleUsed=2;//目前正在进行排液计量的罐
-const int valvelift=40;//阀门开度
-const float DLPS=10;//日产液量
-const bool models=0;//控制模式，0为定压模式，1为定流量模式
+float targetpress=3.0;//目标套压
+float presentpress=4.0;//当前套压
+int targetflow=2500;//目标瞬流
+int presentflow=2300;//当前瞬流
+unsigned int totalflow=400000;//累计流量
+int dailyflow=10000;//日产气量
+int cycle=600;//采样周期
+float stepRange=0.5;//调节幅度
+int storage=30;//数据存储量
+bool power=0;//供电模式
+float instantLP=4.0;//瞬时产液量
+float totalLP=4.0;//累计产液量
+float previousLP=4.0;//前一日产液量
+int bottleUsed=2;//目前正在进行排液计量的罐
+int valvelift=40;//阀门开度
+float DLPS=10;//日产液量
+boolean models=0;//控制模式，0为定压模式，1为定流量模式
 void setup() 
 {
     Serial.begin(9600);
@@ -38,7 +38,8 @@ void APIs()
     Order=Receive_Serial();
     if(Order=="Preferences")
     {
-        Preferences();
+        Serial.print("page Preferences");
+        //Preferences();
     }
     else if(Order=="Setting")
     {
@@ -86,7 +87,7 @@ void APIs()
     else if(Order=="b_AddRange")
     {
         stepRange=stepRange+0.1;
-        if(models=0)
+        if(models==0)
         {
             Setting_1();
          }
@@ -98,7 +99,7 @@ void APIs()
     else if(Order=="b_MinusRange")
     {
           stepRange=stepRange-0.1;
-           if(models=0)
+           if(models==0)
           {
               Setting_1();
            }
@@ -110,7 +111,7 @@ void APIs()
     else if(Order=="b_AddCycle")
     {
           cycle=cycle+10;
-          if(models=0)
+          if(models==0)
           {
               Setting_1();
            }
@@ -122,7 +123,7 @@ void APIs()
     else if(Order=="b_MinusCycle")
     {
           cycle=cycle-10;
-          if(models=0)
+          if(models==0)
           {
               Setting_1();
            }
@@ -133,7 +134,7 @@ void APIs()
     }
     else
     {
-        break;
+        
     }
  }
  /*
@@ -141,7 +142,7 @@ void APIs()
   */
  void Main()
  {
-      if(models=0)
+      if(models==0)
       {
           Main_1();
        }
@@ -159,7 +160,7 @@ String Receive_Serial()
     while(Serial.available()>0)
     {
         order+=char(Serial.read());
-        delay(2);
+        delay(4);
      }
      return order;
  }
@@ -179,18 +180,7 @@ String Receive_Serial()
             Serial.print(".txt=");
             TFT_InputCharF(t_main_1[i]);
        }
-       //for循环，通过串口写入触摸屏
-       /*
-      Serial.print("t_targetpress.txt=");
-      TFT_InputCharF(targetpress);
-      Serial.print("t_presentpress.txt=");
-      TFT_InputCharF(presentpress);
-      Serial.print("t_presentflow.txt=");
-      TFT_InputCharF(presentflow);
-      Serial.print("t_valvelift.txt=");
-      TFT_InputCharF(valvelift);
-      Serial.print("t_DLPS.txt=");
-      TFT_InputCharF(DLPS);*/              
+       //for循环，通过串口写入触摸屏            
  }
  /*
   * 主页面2显示
