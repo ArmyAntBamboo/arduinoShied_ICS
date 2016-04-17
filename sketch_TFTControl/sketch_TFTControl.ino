@@ -66,6 +66,18 @@ void off() //结束代码
   */
  void Main_1()
  {
+      float t_main_1[5] ={targetpress,presentpress,presentflow,valvelift,DLPS};
+      //定义浮点型数组，用存放显示的数据
+      String str_main_1[5]={"t_targetpress","t_presentpress","t_presentflow","t_valvelift","t_DLPS"};
+      //定义字符串数组，用来存放在触摸屏上对应的地址
+      for(int i=0;i<5;i++)
+      {
+            Serial.print(str_main_1[i]);
+            Serial.print(".txt=");
+            TFT_InputCharF(t_main_1[i]);
+       }
+       //for循环，通过串口写入触摸屏
+       /*
       Serial.print("t_targetpress.txt=");
       TFT_InputCharF(targetpress);
       Serial.print("t_presentpress.txt=");
@@ -75,7 +87,7 @@ void off() //结束代码
       Serial.print("t_valvelift.txt=");
       TFT_InputCharF(valvelift);
       Serial.print("t_DLPS.txt=");
-      TFT_InputCharF(DLPS);              
+      TFT_InputCharF(DLPS);*/              
  }
 void TFT_InputCharF(float f1)
  {
