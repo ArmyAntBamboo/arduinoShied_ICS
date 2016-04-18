@@ -38,8 +38,7 @@ void APIs()
     Order=Receive_Serial();
     if(Order=="Preferences")
     {
-        Serial.print("page Preferences");
-        //Preferences();
+        Preferences();
     }
     else if(Order=="Setting")
     {
@@ -174,6 +173,7 @@ String Receive_Serial()
       String str_main_1[5]={"t_targetpress","t_presentpress","t_presentflow","t_valvelift","t_DLPS"};
       //定义字符串数组，用来存放在触摸屏上对应的地址
       Serial.print("page Main_1");
+      off();
       for(int i=0;i<5;i++)
       {
             Serial.print(str_main_1[i]);
@@ -192,6 +192,7 @@ void Main_2()
       String str_main_2[5]={"t_targetflow","t_presentflow","t_presentpress","t_valvelift","t_DLPS"};
       //定义字符串数组，用来存放在触摸屏上对应的地址
       Serial.print("page Main_2");
+      off();
       for(int i=0;i<5;i++)
       {
             Serial.print(str_main_2[i]);
@@ -206,6 +207,7 @@ void Preferences()
       String str_Preferences[10]={"t_presentpress","t_targetpress","t_presentflow","t_targetflow","t_totalflow","t_dailyflow","t_cycle","t_stepRange","t_valvelift","t_storage"};
       //定义字符串数组，用来存放在触摸屏上对应的地址
       Serial.print("page Preferences");
+      off();
       for(int i=0;i<10;i++)
       {
             Serial.print(str_Preferences[i]);
@@ -223,6 +225,7 @@ void Preferences()
        String str_Setting_1[4]={"t_presentpress","t_targetpress","t_stepRange","t_cycle"};
       //定义字符串数组，用来存放在触摸屏上对应的地址
       Serial.print("page Setting_1");
+      off();
       for(int i=0;i<4;i++)
       {
             Serial.print(str_Setting_1[i]);
@@ -237,6 +240,7 @@ void Setting_2()
       String str_Setting_2[4]={"t_presentflow","t_targetflow","t_stepRange","t_cycle"};
       //定义字符串数组，用来存放在触摸屏上对应的地址
       Serial.print("page Setting_2");
+      off();
       for(int i=0;i<4;i++)
       {
             Serial.print(str_Setting_2[i]);
@@ -251,14 +255,17 @@ void LPS()
       String str_LPS[4]={"t_DLPS","t_instantLP","t_totalLP","t_previousLP"};
       //定义字符串数组，用来存放在触摸屏上对应的地址
       Serial.print("page LPS");
+      off();
       for(int i=0;i<4;i++)
       {
             Serial.print(str_LPS[i]);
             Serial.print(".txt=");
             TFT_InputCharF(t_LPS[i]);
        }
-       Serial.print("n_bottleUsed.val=");
+       Serial.print("t_bottleUsed.txt=");
+       Serial.print("\"");
        Serial.print(bottleUsed);
+       Serial.print("\"");
        off();
  }
 void TFT_InputCharF(float f1)
@@ -267,4 +274,5 @@ void TFT_InputCharF(float f1)
       Serial.print(f1);
       Serial.print("\""); 
       off();
+      delay(2);
   }
